@@ -12,7 +12,7 @@ import { IsOptional, ValidateNested, validateSync } from 'class-validator';
 import { KeySharesData } from './KeySharesData/KeySharesData';
 import { KeySharesPayload } from './KeySharesData/KeySharesPayload';
 import { EncryptShare } from '../Encryption/Encryption';
-import { IKeySharesPartitialData } from './KeySharesData/IKeySharesData';
+import { IKeySharesPartialData } from './KeySharesData/IKeySharesData';
 import { IOperator } from './KeySharesData/IOperator';
 import { operatorSortedList } from '../helpers/operator.helper';
 import { OwnerAddressFormatError, OwnerNonceFormatError } from '../exceptions/keystore';
@@ -134,12 +134,12 @@ export class KeySharesItem {
     const sharesPt = bytes.replace('0x', '').substring(SIGNATURE_LENGHT);
 
     const pkSplit = sharesPt.substring(0, operatorCount * PUBLIC_KEY_LENGHT);
-    const pkArray = arrayify(pkSplit);
+    const pkArray = arrayify('0x' + pkSplit);
     const sharesPublicKeys = this.splitArray(operatorCount, pkArray)
       .map(item => hexlify(item));
 
     const eSplit = bytes.substring(operatorCount * PUBLIC_KEY_LENGHT);
-    const eArray = arrayify(eSplit);
+    const eArray = arrayify('0x' + eSplit);
     const encryptedKeys = this.splitArray(operatorCount, eArray).map(item =>
       Buffer.from(hexlify(item).replace('0x', ''), 'hex').toString(
         'base64',
@@ -152,7 +152,7 @@ export class KeySharesItem {
   /**
    * Updates the current instance with partial data and payload, and validates.
    */
-  update(data: IKeySharesPartitialData): void {
+  update(data: IKeySharesPartialData): void {
     this.data.update(data);
     this.validate();
   }
