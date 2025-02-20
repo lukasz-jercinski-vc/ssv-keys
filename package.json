@@ -34,6 +34,7 @@
     "esbuild": "node ./esbuild.js",
     "pre-commit": "yarn test && yarn lint && yarn build-all",
     "package-linux": "pkg dist/tsc/src/cli-interactive.js --targets node14-linux-x64 --output bin/linux/ssv-keys-lin --compress GZip",
+    "package-linuxstatic": "pkg dist/tsc/src/cli-interactive.js --targets node14-linuxstatic-x64 --output bin/linux/ssv-keys-linuxstatic --compress GZip",
     "package-macos": "pkg dist/tsc/src/cli-interactive.js --targets node14-macos-x64 --output bin/macos/ssv-keys-mac --compress GZip",
     "package-win": "pkg dist/tsc/src/cli-interactive.js --targets node14-win-x64 --output bin/win/ssv-keys.exe --compress GZip",
     "package-all": "yarn package-linux && yarn package-macos && yarn package-win"
@@ -101,5 +102,6 @@
     {
       "MIT": "SEE LICENSE IN LICENCE FILE"
     }
-  ]
+  ],
+  "packageManager": "yarn@1.22.21+sha1.1959a18351b811cdeedbd484a8f86c3cc3bbaf72"
 }
